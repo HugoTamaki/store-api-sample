@@ -1,5 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe ApiKey, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe ApiKey do
+  !let(:api_key) { FactoryGirl.create(:api_key) }
+
+  describe "Attributes" do
+    it { expect(api_key).to have_attribute(:secret) }
+    it { expect(api_key).to have_attribute(:key) }
+  end
 end

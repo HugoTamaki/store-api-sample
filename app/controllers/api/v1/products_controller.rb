@@ -2,7 +2,6 @@ module Api
   module V1
     class ProductsController < ApplicationController
       before_action :set_product, only: [:show, :update, :destroy]
-      before_filter :restrict_access
 
       def index
         @products = Product.all
@@ -42,13 +41,6 @@ module Api
 
       def product_params
         params.require(:product).permit(:name, :price, :category_id, :released_at)
-      end
-
-      def restrict_access
-        authenticate_or_request_with_http_token do |token, options|
-          secret, key = token.split(':')
-          ApiKey.exists?(secret: secret, key: key)
-        end
       end
     end
   end
