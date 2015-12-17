@@ -21,7 +21,7 @@ module Api
       end
 
       def update
-        if @category.update(params[:category])
+        if @category.update(category_params)
           redirect_to api_v1_product_path(@category)
         else
           render json: @category.errors.messages
@@ -30,6 +30,7 @@ module Api
 
       def destroy
         @category.destroy
+        render json: @category
       end
 
       private
@@ -39,7 +40,7 @@ module Api
       end
 
       def category_params
-        params.require(:product).permit(:name)
+        params.require(:category).permit(:name)
       end
     end
   end
